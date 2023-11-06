@@ -1,10 +1,10 @@
-items = []  #เก็บรายการสินค้า
+items = []  # Store product items
 
 def add_item():
-    name = input("Enter product name : ")
-    price = float(input("Enter product price : "))
-    stock = int(input("Enter number of products you want to be added to the stock : "))
-    
+    name = input("Enter product name: ")
+    price = float(input("Enter product price: "))
+    stock = int(input("Enter the number of products you want to add to the stock: "))
+
     new_item = {
         "name": name,
         "price": price,
@@ -13,17 +13,16 @@ def add_item():
     }
 
     items.append(new_item)
-    print()
-    print("The Product has been added to the stock!")
-    print(f"Added product: {name}, Price: {price}, Stock: {stock}")
-    print()
+    print("\nThe product has been added to the stock!")
+    print(f"Added product: {name}, Price: {price}, Stock: {stock}\n")
     return new_item
 
 def Product_stock():
     print("Products in stock:")
     for item in items:
-        print(f"Name: {item['name']}, Price: {item['price']}, Stock: {item['stock']}")
-    print()
+        print(f"Name: {item['name']}")
+        print(f"Price: {item['price']}")
+        print(f"Stock: {item['stock']}\n")
 
 def make_sale():
     name = input("Product name to sell: ")
@@ -34,14 +33,14 @@ def make_sale():
         if item["name"] == name:
             if item["stock"] >= num_of_product:
                 item["stock"] -= num_of_product
-                item["sold_quantity"] += num_of_product  # Update the sold quantity
+                item["sold_quantity"] += num_of_product
                 print(f"Sold product: {name}, Price: {item['price']}, Amount: {num_of_product}")
                 found_product = True
                 break
 
     if not found_product:
         print("Product not found.")
-    print()    
+    print()
 
 def Generate_bill():
     print("Bill:")
@@ -59,7 +58,6 @@ def Generate_bill():
     print("-------------------------------------------")
     print(f"Total: {total_bill:.2f} Bath\n")
 
-
 while True:
     print("=======================================")
     print(":  POS of Electrical Appliance Store  :")
@@ -71,12 +69,11 @@ while True:
     print(":5. Exit                              :")
     print("=======================================")
     print()
-    choice = int(input("Enter your choice : "))
+    choice = int(input("Enter your choice: "))
     print()
 
     if choice == 1:
-        item = add_item()
-        items.append(item)
+        add_item()
         
     elif choice == 2:
         Product_stock()
