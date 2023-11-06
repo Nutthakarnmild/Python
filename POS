@@ -1,0 +1,91 @@
+items = []  #เก็บรายการสินค้า
+
+def add_item():
+    name = input("Enter product name : ")
+    price = float(input("Enter product price : "))
+    stock = int(input("Enter number of products you want to be added to the stock : "))
+    
+    new_item = {
+        "name": name,
+        "price": price,
+        "stock": stock,
+        "sold_quantity": 0
+    }
+
+    items.append(new_item)
+    print()
+    print("The Product has been added to the stock!")
+    print(f"Added product: {name}, Price: {price}, Stock: {stock}")
+    print()
+    return new_item
+
+def Product_stock():
+    print("Product in stock:")
+    for item in items:
+        print(f"Name : {item['name']}, Price : {item['price']}, stock : {item['stock']}")
+    print()
+
+def make_sale():
+    name = input("Product name to sell: ")
+    num_of_product = int(input("Number of products you want to sell: "))
+
+    found_product = False
+    for item in items:
+        if item["name"] == name:
+            if item["stock"] >= num_of_product:
+                item["stock"] -= num_of_product
+                item["sold_quantity"] += num_of_product  # Update the sold quantity
+                print(f"Sold product: {name}, Price: {item['price']}, Amount: {num_of_product}")
+                found_product = True
+                break
+
+    if not found_product:
+        print("Product not found.")
+    print()    
+
+def Generate_bill():
+    print("Bill:")
+    print("----------------------------------------")
+    print("Product              Price         Total")
+    print("----------------------------------------")
+    total_bill = 0
+
+    for item in items:
+        total_item_price = item['price'] * item['sold_quantity']
+        total_bill += total_item_price
+        print(f"{item['name']}\t   {item['price']:.2f}\t   {total_item_price:.2f}")
+
+    print("----------------------------------------")
+    print(f"Total: {total_bill:.2f} Bath\n")
+
+
+while True:
+    print("=======================================")
+    print(":  POS of Electrical Appliance Store  :")
+    print("=======================================")
+    print(":1. Add a product to the stock        :")
+    print(":2. Product stock                     :")
+    print(":3. Make a sale                       :")
+    print(":4. Generate a bill                   :")
+    print(":5. Exit                              :")
+    print("=======================================")
+    print()
+    choice = int(input("Enter your choice : "))
+    print()
+
+    if choice == 1:
+        item = add_item()
+        items.append(item)
+        
+    elif choice == 2:
+        Product_stock()
+        
+    elif choice == 3:
+        make_sale()
+
+    elif choice == 4:
+        Generate_bill()
+        
+    elif choice == 5:
+        print("Exit Program...")
+        break
